@@ -4,8 +4,7 @@ actor Lock {
     type LockActor = actor {
         add1 : () -> async Nat;
     };
-    var a : Nat = 0;
-    var n : Nat = 0;
+    var a : Nat = 1;
     public func add1() : async Nat {
         a += 1;
         return a;
@@ -18,20 +17,14 @@ actor Lock {
         return (result, a);
     };
 
-    public func addN() : async (Nat,Nat) {        
-        a += 1;
-        n += 1;
-        let handler : actor { addN : () -> async (Nat,Nat) } = actor(Principal.toText(Principal.fromActor(Lock)));
-        if (n >= 5) { return (a, n); };
-        let _ = await handler.addN();
-        return (a, n);
+    public func addN() : async Nat {        
+        let handler : actor { addN : () -> async Nat } = actor(Principal.toText(Principal.fromActor(Lock)));
+        let result = await handler.addN();
+        a += 1;        
+        return a;
     };
 
     public query func get() : async Nat {
         return a;
     };
-
-    public query func getn() : async Nat {
-        return n;
-    };    
 };

@@ -3,19 +3,6 @@
     "lock_dfx": {
       "main": "src/lock_dfx/main.mo",
       "type": "motoko"
-    },
-    "lock_dfx_assets": {
-      "dependencies": [
-        "lock_dfx"
-      ],
-      "frontend": {
-        "entrypoint": "src/lock_dfx_assets/src/index.html"
-      },
-      "source": [
-        "src/lock_dfx_assets/assets",
-        "dist/lock_dfx_assets/"
-      ],
-      "type": "assets"
     }
   },
   "defaults": {
